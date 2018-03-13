@@ -1,4 +1,4 @@
-[](http://wes.io/q8kx/content)
+![](http://wes.io/q8kx/content)
 
 ## React Context
 
