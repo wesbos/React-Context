@@ -54,7 +54,7 @@ class App extends Component {
     return (
       <MyProvider>
         <div>
-          <p>I'm the app</p>
+          <p>I am the app</p>
           <Family />
         </div>
       </MyProvider>
