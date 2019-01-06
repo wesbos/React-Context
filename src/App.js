@@ -1,61 +1,58 @@
-import React, { Component } from 'react';
+import React, { useContext, useState } from 'react'
 
 // first we will make a new context
-const MyContext = React.createContext();
+const MyContext = React.createContext()
 
 // Then create a provider Component
-class MyProvider extends Component {
-  state = {
+function MyProvider(props) {
+  const initialState = {
     name: 'Wes',
-    age: 100,
+    age: 29,
     cool: true
   }
-  render() {
-    return (
-      <MyContext.Provider value={{
-        state: this.state,
-        growAYearOlder: () => this.setState({
-          age: this.state.age + 1
-        })
-      }}>
-        {this.props.children}
-      </MyContext.Provider>
-    )
-  }
+
+  const [state, setState] = useState(initialState)
+
+  return (
+    <MyContext.Provider value={{
+      state: state,
+      growAYearOlder: () => setState({
+        ...state,
+        age: state.age + 1,
+      })
+    }}>
+      {props.children}
+    </MyContext.Provider>
+  )
 }
 
-const Family = (props) => (
+const Family = () => (
   <div className="family">
     <Person />
   </div>
 )
 
-const Person = () => {
+function Person() {
+  const context = useContext(MyContext)
   return (
     <div className="person">
-      <MyContext.Consumer>
-        {(context) => (
-          <React.Fragment>
-            <p>Age: {context.state.age}</p>
-            <p>Name: {context.state.name}</p>
-            <button onClick={context.growAYearOlder}>🍰🍥🎂</button>
-          </React.Fragment>
-        )}
-      </MyContext.Consumer>
+      <p>Age: {context.state.age}</p>
+      <p>Name: {context.state.name}</p>
+      <p>Cool: {context.state.cool ? 'Yess!' : 'umpumm...'}</p>
+      <button onClick={context.growAYearOlder}>
+        🍰🍥🎂
+      </button>
     </div>
   )
 }
 
-
 const App = () => {
   return (
     <MyProvider>
-      <div>
-        <p>I am the app</p>
-        <Family />
-      </div>
+      <p>I am the app</p>
+      <Family />
     </MyProvider>
-  );
+  )
 }
 
-export default App;
+export default App
