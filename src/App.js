@@ -49,18 +49,15 @@ class Person extends Component {
 }
 
 
-class App extends Component {
-  render() {
-    return (
-      <MyProvider>
-        <div>
-          <p>I am the app</p>
-          <Family />
-        </div>
-      </MyProvider>
-    );
-  }
+const App = () => {
+  return (
+    <MyProvider>
+      <div>
+        <p>I am the app</p>
+        <Family />
+      </div>
+    </MyProvider>
+  );
 }
-
 
 export default App;
